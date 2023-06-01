@@ -20,4 +20,7 @@ steps:
       azureSubscription: 'Azure'
       scriptType: 'ps'
       scriptLocation: 'inlineScript'
-      inlineScript: ''
+      inlineScript: |
+        terraform init
+        terraform validate
+        terraform apply -auto-approve
