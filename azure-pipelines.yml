@@ -8,8 +8,7 @@ trigger:
     include:
     - master
 
-pool:
-  vmImage: 'windows-latest'
+pool: 'LocalAgent'
 
 variables:
   buildConfiguration: 'Release'
