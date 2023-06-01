@@ -8,8 +8,7 @@ variables:
 trigger:
 - main
 
-pool:
-  vmImage: ubuntu-latest
+pool: LocalAgent
 
 steps:
   - task: TerraformInstaller@0
