@@ -14,10 +14,7 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- script: cd backend
-  displayName: 'Change directory'
-
-- script: dotnet build --configuration $(buildConfiguration)
+- script: cd backend && dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
 
 - task: DotNetCoreCLI@2
