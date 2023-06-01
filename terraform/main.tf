@@ -2,7 +2,7 @@ provider "azurerm" {
   features {}
 }
 
-ferraform {
+terraform {
     backend "azurerm"{
         resource_group_name = "Operational"
         storage_account_name = "dbszkolenieoperational"
