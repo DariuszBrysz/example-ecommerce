@@ -21,4 +21,4 @@ steps:
         cd terraform
         terraform init
         terraform validate
-        terraform apply -destroy -auto-approve
+        terraform destroy -auto-approve
