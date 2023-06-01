@@ -21,6 +21,7 @@ steps:
       scriptType: 'ps'
       scriptLocation: 'inlineScript'
       inlineScript: |
+        cd terraform
         terraform init
         terraform validate
         terraform apply -auto-approve
