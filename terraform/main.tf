@@ -83,3 +83,15 @@ name                  = "mycontainer"
 storage_account_name  = azurerm_storage_account.example.name
 container_access_type = "private"
 }
+
+resource "azuread_application" "example" {
+  display_name = azurerm_app_service.example.name
+  homepage     = "https://mywebappdbszkolenie.azurewebsites.net"
+  identifier_uris = [
+    "https://mywebappdbszkolenie.azurewebsites.net"
+  ]
+}
+
+resource "azuread_service_principal" "example" {
+  application_id = azuread_application.example.application_id
+}
