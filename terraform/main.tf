@@ -2,6 +2,10 @@ provider "azurerm" {
   features {}
 }
 
+provider "azuread" {
+  tenant_id = "beb78ea8-cc42-4593-a1db-61b48468e933"
+}
+
 terraform {
     backend "azurerm"{
         resource_group_name = "Operational"
@@ -89,6 +93,10 @@ resource "azuread_application" "example" {
   identifier_uris = [
     "https://mywebappdbszkolenie.azurewebsites.net"
   ]
+
+  web {
+    homepage_url = "https://mywebappdbszkolenie.azurewebsites.net"
+  }
 }
 
 resource "azuread_service_principal" "example" {
