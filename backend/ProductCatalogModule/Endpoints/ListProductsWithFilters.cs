@@ -1,3 +1,5 @@
+using System.Security.Claims;
+
 namespace Backend.ProductCatalogModule;
 
 public class ListProductsWithFilters
@@ -11,9 +13,9 @@ public class ListProductsWithFilters
         _authorizationService = authorizationService;
     }
 
-    public async Task<IEnumerable<Product>> ExecuteAsync(string? name, decimal? minPrice, decimal? maxPrice, bool? onlyInStock)
+    public async Task<IEnumerable<Product>> ExecuteAsync(ClaimsPrincipal user, string? name, decimal? minPrice, decimal? maxPrice, bool? onlyInStock)
     {
-        _authorizationService.Authorize(Permissions.ListProductsWithFilters);
+        _authorizationService.Authorize(Permissions.ListProductsWithFilters, user);
         return await _productRepository.ListAsync(name, minPrice, maxPrice, onlyInStock);
     }
 }

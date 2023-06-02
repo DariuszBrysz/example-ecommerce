@@ -1,3 +1,5 @@
+using System.Security.Claims;
+
 namespace Backend.InventoryModule;
 
 public class RemoveStock
@@ -11,9 +13,9 @@ public class RemoveStock
         _authorizationService = authorizationService;
     }
 
-    public async Task<int> ExecuteAsync(Guid productId, int quantity)
+    public async Task<int> ExecuteAsync(Guid productId, int quantity, ClaimsPrincipal user)
     {
-        _authorizationService.Authorize(Permissions.RemoveStock);
+        _authorizationService.Authorize(Permissions.RemoveStock, user);
         return await _inventoryRepository.RemoveStockAsync(productId, quantity);
     }
 }

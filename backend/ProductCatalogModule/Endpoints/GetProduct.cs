@@ -1,3 +1,5 @@
+using System.Security.Claims;
+
 namespace Backend.ProductCatalogModule;
 
 public class GetProduct
@@ -11,9 +13,9 @@ public class GetProduct
         _authorizationService = authorizationService;
     }
 
-    public async Task<Product> ExecuteAsync(Guid id)
+    public async Task<Product> ExecuteAsync(Guid id, ClaimsPrincipal user)
     {
-        _authorizationService.Authorize(Permissions.GetProduct);
+        _authorizationService.Authorize(Permissions.GetProduct, user);
         return await _productRepository.GetAsync(id);
     }
 }

@@ -1,3 +1,5 @@
+using System.Security.Claims;
+
 namespace Backend.ImageUploadModule
 {
     public class UploadImage
@@ -13,9 +15,9 @@ namespace Backend.ImageUploadModule
             _imageStorageService = imageStorageService;
         }
 
-        public async Task<Image> ExecuteAsync(Guid productId, Stream imageStream)
+        public async Task<Image> ExecuteAsync(Guid productId, Stream imageStream, ClaimsPrincipal user)
         {
-            _authorizationService.Authorize(Permissions.UploadImage);
+            _authorizationService.Authorize(Permissions.UploadImage, user);
             Guid imageId = Guid.NewGuid();
             string relativeUrl = await _imageStorageService.UploadImageAsync(imageId, imageStream);
             return await _imageRepository.AddImageAsync(new Image

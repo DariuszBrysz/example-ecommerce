@@ -6,8 +6,6 @@ public class MockAuthorizationService
 {
     public void Authorize(Permission permission)
     {
-        // Do nothing
-        // In regular implementation, this would throw an exception if the user is not authorized
         switch (permission)
         {
             case Permission.GetProduct:

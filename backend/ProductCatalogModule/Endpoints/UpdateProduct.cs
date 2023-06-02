@@ -1,6 +1,7 @@
 namespace Backend.ProductCatalogModule
 {
     using System;
+    using System.Security.Claims;
     using System.Threading.Tasks;
 
     public class UpdateProduct
@@ -14,9 +15,9 @@ namespace Backend.ProductCatalogModule
             _authorizationService = authorizationService;
         }
 
-        public async Task<Product> ExecuteAsync(Guid id, Product product)
+        public async Task<Product> ExecuteAsync(Guid id, Product product, ClaimsPrincipal user)
         {
-            _authorizationService.Authorize(Permissions.UpdateProduct);
+            _authorizationService.Authorize(Permissions.UpdateProduct, user);
             var existingProduct = await _productRepository.GetAsync(id) ?? throw new ProductNotFoundException(id);
             existingProduct.Name = product.Name;
             existingProduct.Description = product.Description;

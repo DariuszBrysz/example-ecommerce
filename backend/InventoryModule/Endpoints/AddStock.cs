@@ -1,3 +1,5 @@
+using System.Security.Claims;
+
 namespace Backend.InventoryModule;
 
 public class AddStock
@@ -11,9 +13,9 @@ public class AddStock
         _authorizationService = authorizationService;
     }
 
-    public async Task<int> ExecuteAsync(Guid productId, int quantity)
+    public async Task<int> ExecuteAsync(Guid productId, int quantity, ClaimsPrincipal user)
     {
-        _authorizationService.Authorize(Permissions.AddStock);
+        _authorizationService.Authorize(Permissions.AddStock, user);
         return await _inventoryRepository.AddStockAsync(productId, quantity);
     }
 }

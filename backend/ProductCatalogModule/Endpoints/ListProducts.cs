@@ -1,3 +1,5 @@
+using System.Security.Claims;
+
 namespace Backend.ProductCatalogModule;
 
 public class ListProducts
@@ -11,9 +13,9 @@ public class ListProducts
         _authorizationService = authorizationService;
     }
 
-    public async Task<IEnumerable<Product>> ExecuteAsync()
+    public async Task<IEnumerable<Product>> ExecuteAsync(ClaimsPrincipal user)
     {
-        _authorizationService.Authorize(Permissions.ListProducts);
+        _authorizationService.Authorize(Permissions.ListProducts, user);
         return await _productRepository.ListAsync();
     }
 }
