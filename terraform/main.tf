@@ -91,7 +91,7 @@ container_access_type = "private"
 resource "azuread_application" "example" {
   display_name = azurerm_app_service.example.name
   identifier_uris = [
-    "https://mywebappdbszkolenie.azurewebsites.net"
+    "api://mywebappdbszkolenie.azurewebsites.net"
   ]
 
   web {
