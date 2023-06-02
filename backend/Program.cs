@@ -14,8 +14,7 @@ IConfiguration config = builder.Configuration
     .AddEnvironmentVariables()
     .Build();
 builder.Services.AddSingleton(config);
-// TODO
-builder.Services.AddDbContext<BackendDbContext>(opt => opt.UseInMemoryDatabase("mock"));
+builder.Services.AddDbContext<BackendDbContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("DBConnectionString")));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IInventoryRepository, InventoryRepository>();
