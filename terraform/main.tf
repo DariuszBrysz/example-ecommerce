@@ -44,3 +44,19 @@ resource "azurerm_app_service" "example" {
     "APPINSIGHTS_INSTRUMENTATIONKEY" = azurerm_application_insights.example.instrumentation_key
   }
 }
+
+resource "azurerm_sql_server" "example" {
+  name                         = "mySqlServer"
+  location                     = azurerm_resource_group.example.location
+  resource_group_name          = azurerm_resource_group.example.name
+  version                      = "12.0"
+  administrator_login          = "myAdmin"
+  administrator_login_password = "myPassword1234!"
+}
+
+resource "azurerm_sql_database" "example" {
+  name                = "myDatabase"
+  resource_group_name = azurerm_resource_group.example.name
+  server_name         = azurerm_sql_server.example.name
+  edition             = "Basic"
+}
